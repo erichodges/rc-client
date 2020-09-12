@@ -1,9 +1,6 @@
 import {
   Code,
   Icon, Link as ChakraLink,
-
-
-
   List,
   ListIcon,
   ListItem, Text
