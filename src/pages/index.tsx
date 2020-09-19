@@ -1,6 +1,13 @@
+import React from 'react';
+import { NavBar } from '../components/NavBar';
 
 const Index = () => (
-  <div>Yo world</div>
-)
+  <>
+    <NavBar />
+    <div>
+      <h1>Yo world</h1>
+    </div>
+  </>
+);
 
 export default Index;
