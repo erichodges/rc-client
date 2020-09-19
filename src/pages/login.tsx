@@ -50,7 +50,7 @@ export const Login: React.FC<{}> = ({}) => {
             </Button>
             <Button mt={4} ml="57.55%" variantColor="teal">
               <NextLink href="/register">
-                <Link>Register</Link>
+                <Link>Sign Up</Link>
               </NextLink>
             </Button>
           </Form>
