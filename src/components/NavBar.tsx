@@ -17,22 +17,23 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         <NextLink href="/login">
           <Link mr={2}>Login</Link>
         </NextLink>
-        <NextLink href="/register">
-          <Link>Register</Link>
-        </NextLink>
       </>
     );
     // user logged in
   } else {
     body = (
       <Flex>
-        <Box mr={2}>{data.user.username}</Box>
-        <Button variant="link">Logout</Button>
+        <Box mr={2} fontSize="xl" mt={1}>
+          {data.user.username}
+        </Box>
+        <Button fontSize="xs" variant="ghost">
+          logout
+        </Button>
       </Flex>
     );
   }
   return (
-    <Flex bg="grey" p={4}>
+    <Flex bg="grey" pr={4} pt={1} height="3rem">
       <Box ml="auto">{body}</Box>
     </Flex>
   );

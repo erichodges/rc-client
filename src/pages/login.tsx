@@ -1,5 +1,6 @@
-import { Box, Button } from '@chakra-ui/core';
+import { Box, Button, Link } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { InputField } from '../components/inputField';
@@ -40,12 +41,17 @@ export const Login: React.FC<{}> = ({}) => {
               />
             </Box>
             <Button
-              mt={4}
               type="submit"
               isLoading={isSubmitting}
               variantColor="teal"
+              mt={4}
             >
               Login
+            </Button>
+            <Button mt={4} ml="57.55%" variantColor="teal">
+              <NextLink href="/register">
+                <Link>Register</Link>
+              </NextLink>
             </Button>
           </Form>
         )}
