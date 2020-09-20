@@ -46,9 +46,9 @@ export const Login: React.FC<{}> = ({}) => {
               variantColor="teal"
               mt={4}
             >
-              Login
+              Sign In
             </Button>
-            <Button mt={4} ml="57.55%" variantColor="teal">
+            <Button mt={4} ml="56%" variantColor="teal">
               <NextLink href="/register">
                 <Link>Sign Up</Link>
               </NextLink>
