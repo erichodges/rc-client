@@ -1,4 +1,4 @@
-import { QueryInput } from '@urql/exchange-graphcache';
+import { Cache, QueryInput } from '@urql/exchange-graphcache';
 
 export function betterUpdateQuery<Result, Query>(
   cache: Cache,
