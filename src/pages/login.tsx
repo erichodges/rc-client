@@ -1,4 +1,4 @@
-import { Box, Button, Link } from '@chakra-ui/core';
+import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
@@ -42,6 +42,11 @@ export const Login: React.FC<{}> = ({}) => {
                 type="password"
               />
             </Box>
+            <Flex mt={2}>
+              <NextLink href="/forgot-password">
+                <Link ml="auto">forgot password?</Link>
+              </NextLink>
+            </Flex>
             <Button
               type="submit"
               isLoading={isSubmitting}
