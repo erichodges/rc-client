@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { createUrqlClient } from 'src/utills/createUrqlClient';
-import { InputField } from '../components/inputField';
+import { createUrqlClient } from 'src/utils/createUrqlClient';
+import { InputField } from '../components/InputField';
 import { Wrapper } from '../components/Wrapper';
 import { useRegisterMutation } from '../generated/graphql';
-import { toErrorMap } from '../utills/toErrorMap';
+import { toErrorMap } from '../utils/toErrorMap';
 
 interface registerProps {}
 

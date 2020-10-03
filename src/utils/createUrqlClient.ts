@@ -1,13 +1,26 @@
 import { cacheExchange } from '@urql/exchange-graphcache';
+import Router from 'next/router';
+import { dedupExchange, Exchange, fetchExchange } from 'urql';
+import { pipe, tap } from 'wonka';
 import {
   LoginMutation,
   LogoutMutation,
   RegisterMutation,
   UserDocument,
   UserQuery
-} from 'src/generated/graphql';
-import { dedupExchange, fetchExchange } from 'urql';
+} from '../generated/graphql';
 import { betterUpdateQuery } from './betterUpdateQuery';
+
+const errorExchange: Exchange = ({ forward }) => (ops$) => {
+  return pipe(
+    forward(ops$),
+    tap(({ error }) => {
+      if (error?.message.includes('not authenticated')) {
+        Router.replace('/login');
+      }
+    })
+  );
+};
 
 export const createUrqlClient = (ssrExchange: any) => ({
   url: 'http://localhost:4444/graphql',
@@ -19,7 +32,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
     cacheExchange({
       updates: {
         Mutation: {
-          logout: (_result, _args, cache, _info) => {
+          logout: (_result, args, cache, info) => {
             betterUpdateQuery<LogoutMutation, UserQuery>(
               cache,
               { query: UserDocument },
@@ -27,7 +40,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
               () => ({ user: null })
             );
           },
-          login: (_result, _args, cache, _info) => {
+          login: (_result, args, cache, info) => {
             betterUpdateQuery<LoginMutation, UserQuery>(
               cache,
               { query: UserDocument },
@@ -43,7 +56,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
               }
             );
           },
-          register: (_result, _args, cache, _info) => {
+          register: (_result, args, cache, info) => {
             betterUpdateQuery<RegisterMutation, UserQuery>(
               cache,
               { query: UserDocument },
@@ -62,6 +75,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
         }
       }
     }),
+    errorExchange,
     ssrExchange,
     fetchExchange
   ]

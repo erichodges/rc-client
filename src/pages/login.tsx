@@ -4,11 +4,11 @@ import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { createUrqlClient } from 'src/utills/createUrqlClient';
-import { InputField } from '../components/inputField';
+import { createUrqlClient } from 'src/utils/createUrqlClient';
+import { InputField } from '../components/InputField';
 import { Wrapper } from '../components/Wrapper';
 import { useLoginMutation } from '../generated/graphql';
-import { toErrorMap } from '../utills/toErrorMap';
+import { toErrorMap } from '../utils/toErrorMap';
 
 export const Login: React.FC<{}> = ({}) => {
   const router = useRouter();
@@ -23,7 +23,12 @@ export const Login: React.FC<{}> = ({}) => {
           if (response.data?.login.errors) {
             setErrors(toErrorMap(response.data.login.errors));
           } else if (response.data?.login.user) {
-            router.push('/');
+            if (typeof router.query.next === 'string') {
+              router.push(router.query.next);
+            } else {
+              // worked
+              router.push('/');
+            }
           }
         }}
       >

@@ -1,13 +1,17 @@
 import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import NextLink from 'next/link';
 import React from 'react';
-import { useLogoutMutation, useUserQuery } from 'src/generated/graphql';
-import { isServer } from 'src/utills/isServer';
+import { useLogoutMutation, useUserQuery } from '../generated/graphql';
+import { isServer } from '../utils/isServer';
+
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
   const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
-  const [{ data, fetching }] = useUserQuery({ pause: isServer() });
+  const [{ data, fetching }] = useUserQuery({
+    pause: isServer()
+  });
+
   let body = null;
 
   // data is loading
@@ -16,36 +20,35 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   } else if (!data?.user) {
     body = (
       <>
-        <Button fontSize="sm" mr={2} pt={1} variant="ghost">
-          <NextLink href="/login">
-            <Link _hover={{ textDecoration: 'none' }}>Login</Link>
-          </NextLink>
-        </Button>
+        <NextLink href="/login">
+          <Link mr={2}>login</Link>
+        </NextLink>
+        <NextLink href="/register">
+          <Link>register</Link>
+        </NextLink>
       </>
     );
-    // user logged in
+    // user is logged in
   } else {
     body = (
       <Flex>
-        <Box mr={2} fontSize="xl" mt={1}>
-          {data.user.username}
-        </Box>
+        <Box mr={2}>{data.user.username}</Box>
         <Button
           onClick={() => {
             logout();
           }}
           isLoading={logoutFetching}
-          fontSize="sm"
-          variant="ghost"
+          variant="link"
         >
           logout
         </Button>
       </Flex>
     );
   }
+
   return (
-    <Flex bg="grey" pr={4} pt={1} height="3rem">
-      <Box ml="auto">{body}</Box>
+    <Flex zIndex={1} position="sticky" top={0} bg="tan" p={4}>
+      <Box ml={'auto'}>{body}</Box>
     </Flex>
   );
 };

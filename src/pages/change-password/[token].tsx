@@ -5,11 +5,11 @@ import { withUrqlClient } from 'next-urql';
 import { NextLink } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { InputField } from 'src/components/inputField';
+import { InputField } from 'src/components/InputField';
 import { Wrapper } from 'src/components/Wrapper';
 import { useChangePasswordMutation } from 'src/generated/graphql';
-import { createUrqlClient } from 'src/utills/createUrqlClient';
-import { toErrorMap } from 'src/utills/toErrorMap';
+import { createUrqlClient } from 'src/utils/createUrqlClient';
+import { toErrorMap } from 'src/utils/toErrorMap';
 
 const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
   const router = useRouter();
