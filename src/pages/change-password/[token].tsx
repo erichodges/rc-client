@@ -2,7 +2,7 @@ import { Box, Button, Flex, Link } from '@chakra-ui/core';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
-import { NextLink } from 'next/link';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { InputField } from 'src/components/InputField';
