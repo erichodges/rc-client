@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Stack, Text } from '@chakra-ui/core';
+import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/core';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
 import React from 'react';
@@ -36,6 +36,13 @@ const Index = () => {
           ))}
         </Stack>
       )}
+      {data ? (
+        <Flex>
+          <Button isLoading={fetching} m="auto" my={8}>
+            More...
+          </Button>
+        </Flex>
+      ) : null}
     </Layout>
   );
 };
