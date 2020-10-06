@@ -1,16 +1,22 @@
-import { Link } from '@chakra-ui/core';
+import { Box, Heading, Link, Stack, Text } from '@chakra-ui/core';
 import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
+import React from 'react';
 import { Layout } from '../components/Layout';
 import { usePostsQuery } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Index = () => {
-  const [{ data }] = usePostsQuery({
+  const [{ data, fetching }] = usePostsQuery({
     variables: {
-      limit: 5
+      limit: 10
     }
   });
+
+  if (!fetching && !data) {
+    return <div>No posts found!</div>;
+  }
+
   return (
     <Layout>
       <NextLink href="/create-post">
@@ -18,10 +24,17 @@ const Index = () => {
       </NextLink>
       <br />
       <br />
-      {!data ? (
+      {!data && fetching ? (
         <div>loading...</div>
       ) : (
-        data.posts.map((p) => <div key={p.id}>{p.title}</div>)
+        <Stack spacing={8}>
+          {data?.posts.map((p) => (
+            <Box key={p.id} p={5} shadow="md" borderWidth="1px">
+              <Heading fontSize="xl">{p.title}</Heading>
+              <Text mt={4}>{p.textSnippet}</Text>
+            </Box>
+          ))}
+        </Stack>
       )}
     </Layout>
   );
