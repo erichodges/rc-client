@@ -3,7 +3,7 @@ import { withUrqlClient } from 'next-urql';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
 import { Layout } from '../components/Layout';
-import { UpvoteSection } from "../components/UpvoteSection";
+import { UpdootSection } from "../components/UpdootSection";
 import { usePostsQuery } from '../generated/graphql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 
@@ -36,7 +36,7 @@ const Index = () => {
         <Stack spacing={8}>
           {data!.posts.posts.map((p) => (
             <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-              <UpvoteSection post={p} />
+              <UpdootSection post={p} />
               <Box>
                 <Heading fontSize="xl">{p.title}</Heading>
                 <Text>posted by {p.creator.username}</Text>
