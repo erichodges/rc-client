@@ -5,7 +5,7 @@ import { useDeletePostMutation, useUserQuery } from "../generated/graphql";
 
 interface EditDeletePostButtonsProps {
   id: number;
-  creatorId: number;
+  creatorId: string;
 }
 
 export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({
